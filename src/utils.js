@@ -14,12 +14,15 @@ export const calculateSum = (inputString) => {
   const integerStrings = numbers.split(delimiter);
 
   if (integerStrings.length === 0) return 0;
-
+  const negativeNumbers = integerStrings.filter(ele => sanitizeInput(ele) < 0);
+  if(negativeNumbers.length >0 ){
+    return `Negative numbers not allowed ${negativeNumbers.join(',')}`;
+  }
   return integerStrings.reduce((sum, current) => sum + sanitizeInput(current.trim()), 0);
 }
 
 export const sanitizeInput = (value) => {
   const parsedValue = parseInt(value, 10);
-  if (!Number.isInteger(parsedValue) || parsedValue < 0) return 0;
+  if (!Number.isInteger(parsedValue)) return 0;
   return parsedValue;
 }

@@ -12,14 +12,21 @@ describe('calculateSum Function', () => {
   test('adds "1/n,2,3,4\n" to equal 6', () => {
     expect(calculateSum('1/n,2,3,4\n')).toBe(10);
   });
+
   test('adds "1, \n" to equal 1', () => {
     expect(calculateSum('1, \n')).toBe(1);
   });
+
   test('adds "//;\n1;2;3" to equal to 6', () => {
     expect(calculateSum('//;\\n1;2;3;')).toBe(6);
   });
+
   test('adds "//**\n1;2;3" to equal to 6', () => {
     expect(calculateSum('//**\\n1**2**3**')).toBe(6);
+  });
+
+  test('adds "1,\\n,-1,5" to equal to 6', () => {
+    expect(calculateSum('1,\\n,-1,-5')).toBe('Negative numbers not allowed -1,-5');
   });
 });
 
