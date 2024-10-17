@@ -1,4 +1,4 @@
-export const calculateSum = (inputString) => {
+export const calculateSum = (inputString, selectionType) => { //All, Even, Odd
   let delimiter = ',';
   let numbers = inputString;
 
@@ -18,7 +18,46 @@ export const calculateSum = (inputString) => {
   if(negativeNumbers.length >0 ){
     return `Negative numbers not allowed ${negativeNumbers.join(',')}`;
   }
-  return integerStrings.reduce((sum, current) => sum + sanitizeInput(current.trim()), 0);
+  // return integerStrings.reduce((sum, current) => {
+  //   sum + sanitizeInput(current.trim())
+  // }, 0)
+  // };
+
+  switch (selectionType) {
+    case 'Even':
+      return integerStrings.reduce((sum, current, currentIndex) => {
+        if(currentIndex % 2 === 0) {
+         return sum + sanitizeInput(current.trim())
+        } else {
+          return sum;
+        }
+      }, 0)
+
+    case 'Odd':
+      let oddSum = 0;
+      integerStrings.forEach((ele, index) => {
+        if(index%2 !== 0) {
+          oddSum = oddSum + sanitizeInput(ele);
+        }
+      })
+      return oddSum;
+
+    case 'All':
+    default:
+    return integerStrings.reduce((sum, current) =>
+      sum + sanitizeInput(current.trim()), 0)
+  }
+
+  // return integerStrings.reduce((sum, current, currentIndex ) => {
+  //   switch (selectionType) {
+  //     case "All":
+  //       return sum + sanitizeInput(current.trim());
+  //       break;
+  //     case 'Even':
+  //
+  //       break;
+  //   }
+  // }, 0)
 }
 
 export const sanitizeInput = (value) => {

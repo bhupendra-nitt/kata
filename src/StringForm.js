@@ -5,6 +5,7 @@ const StringForm = () => {
   const [inputString, setInputString] = useState('');
   const [result, setResult] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
+  const [calculationSelection, setCalculationSelection] = useState('All');
 
   const resetValues = () => {
     setResult(null);
@@ -14,7 +15,7 @@ const StringForm = () => {
   const handleCalculate = () => {
     resetValues();
     try {
-      const res = calculateSum(inputString.toString());
+      const res = calculateSum(inputString.toString(), calculationSelection);
       if(Number.isInteger(res)) {
       setResult(res);
       } else {
@@ -25,6 +26,9 @@ const StringForm = () => {
     }
   };
 
+  const handleSelectionChange = (e) => {
+    setCalculationSelection(e.target.value);
+  }
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100 p-4">
       <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
@@ -43,6 +47,13 @@ const StringForm = () => {
             required
           />
         </div>
+       <select onChange={handleSelectionChange} value={calculationSelection}>
+         <option>All</option>
+         <option>Even</option>
+         <option>Odd</option>
+       </select>
+
+
         <button
           onClick={handleCalculate}
           className="w-full bg-blue-500 text-white py-3 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-colors text-lg font-semibold"

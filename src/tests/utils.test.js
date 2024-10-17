@@ -1,8 +1,16 @@
 import {calculateSum, sanitizeInput} from "../utils";
 describe('calculateSum Function', () => {
 
-  test('adds "1,2,3" to equal 6', () => {
-    expect(calculateSum('1,2,3')).toBe(6);
+  test('adds "1,2,3" to equal 6 for All', () => {
+    expect(calculateSum('1,2,3', 'All')).toBe(6);
+  });
+
+  test('adds "1,2,3" to equal 6 for Even', () => {
+    expect(calculateSum('1,2,3', 'Even')).toBe(4);
+  });
+
+  test('adds "1,2,3" to equal 6 for Even For Odd', () => {
+    expect(calculateSum('1,2,3', 'Odd')).toBe(2);
   });
 
   test('adds " " to equal 0', () => {
